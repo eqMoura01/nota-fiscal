@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +25,8 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.clienteService.save(cliente));
+    public ResponseEntity<Cliente> save(@RequestBody Cliente object) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.clienteService.save(object));
     }
 
     @GetMapping("/{id}")
@@ -36,6 +37,11 @@ public class ClienteController {
     @GetMapping("/listAll")
     public ResponseEntity<List<Cliente>> listAll() {
         return ResponseEntity.ok().body(this.clienteService.list());
+    }
+
+    @PutMapping
+    public ResponseEntity<Cliente> update(@RequestBody Cliente object){
+        return ResponseEntity.ok().body(this.clienteService.update(object));
     }
 
     @DeleteMapping("/{id}")
